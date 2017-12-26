@@ -3,7 +3,7 @@
 function playGame() {
 	let userInput = promptUserForInput();
 	convertUserInputToNumberOfPlayers(userInput);
-	startPlaying();
+	confirm("Press OK to begin the game.");
 	let initialRollResults = rollD4();
 	let sixSidedDice = rollD6(initialRollResults);
 	let eightSidedDice = rollD8(initialRollResults, sixSidedDice);
@@ -41,10 +41,6 @@ function promptUserForInput() {
 function convertUserInputToNumberOfPlayers(userInput) {
 	let numberOfPlayers = parseInt(userInput);
 	return numberOfPlayers;
-}
-
-function startPlaying() {
-	confirm("Press OK to begin the game.");
 }
 
 function rollDie(numberOfSides) {
