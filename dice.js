@@ -13,11 +13,23 @@ function playGame() {
 	if (convertUserInputToNumberOfPlayers(userInput) === 2) {
 		confirm("Now it\'s Player 2\'s turn.");
 		let initialRollResults = rollD4();
-		let sixSidedDicePlayerTwo = rollD6(initialRollResults);
-		let eightSidedDicePlayerTwo = rollD8(initialRollResults, sixSidedDicePlayerTwo);
-		let tenSidedDicePlayerTwo = rollD10(initialRollResults, eightSidedDicePlayerTwo);
-		let twelveSidedDicePlayerTwo = rollD12(initialRollResults, tenSidedDicePlayerTwo);
-		let scorePlayerTwo = rollD20(initialRollResults, twelveSidedDicePlayerTwo);
+		let sixSidedDicePlayerTwo = rollD6PlayerTwo(initialRollResults, scorePlayerOne);
+		if (sixSidedDicePlayerTwo > scorePlayerOne) {
+			return;
+		}
+		let eightSidedDicePlayerTwo = rollD8PlayerTwo(initialRollResults, sixSidedDicePlayerTwo, scorePlayerOne);
+		if (eightSidedDicePlayerTwo > scorePlayerOne) {
+			return;
+		}
+		let tenSidedDicePlayerTwo = rollD10PlayerTwo(initialRollResults, eightSidedDicePlayerTwo, scorePlayerOne);
+		if (tenSidedDicePlayerTwo > scorePlayerOne) {
+			return;
+		}
+		let twelveSidedDicePlayerTwo = rollD12PlayerTwo(initialRollResults, tenSidedDicePlayerTwo, scorePlayerOne);
+		if (twelveSidedDicePlayerTwo > scorePlayerOne) {
+			return;
+		}
+		let scorePlayerTwo = rollD20PlayerTwo(initialRollResults, twelveSidedDicePlayerTwo);
 		if (scorePlayerOne < scorePlayerTwo) {
 			confirm("Player 1 scored " + scorePlayerOne + ". Player 2 scored " + scorePlayerTwo + ". Player 1 wins! \nThe game is now over. To play again, reload the page.");
 		}
@@ -55,6 +67,7 @@ function rollD4() {
 	return initialRoll;
 }
 
+
 function rollD6(initialRollToMatch) {
 	let counter = 1;
 	confirm("Press OK to roll the 6-sided dice.");
@@ -69,6 +82,35 @@ function rollD6(initialRollToMatch) {
 	return counter;
 }
 
+function rollD6PlayerTwo(initialRollToMatch, scorePlayerOne) {
+	let counter = 1;
+	confirm("Press OK to roll the 6-sided dice.");
+	let d6Roll = rollDie(6);
+	counter++;
+	for (let i = 1; d6Roll !== initialRollToMatch; i++) {
+		confirm("You have rolled " + d6Roll + ". Your score is now " + counter + ".");
+		d6Roll = rollDie(6);
+		counter++;
+		if (counter > scorePlayerOne) {
+			confirm("Your score of " + counter + " has already exceeded Player 1\'s score of " + scorePlayerOne + ". Player 1 wins.\n To play again, reload the page.");
+			return counter;
+		}
+		else {
+			confirm("Keep rolling the 6-sided dice until you roll a " + initialRollToMatch + ".");
+		}
+	}
+	confirm("You have rolled " + d6Roll + "! Your score is now " + counter + ".");
+	if (counter > scorePlayerOne) {
+		confirm("Your score of " + counter + " has already exceeded Player 1\'s score of " + scorePlayerOne + ". Player 1 wins.\n To play again, reload the page.");
+		return counter;
+	}
+	else {
+		confirm("Proceed to roll the 8-sided dice.");
+	}
+	return counter;
+}
+
+
 function rollD8(initialRollToMatch, currentCounter) {
 	confirm("Press OK to roll the 8-sided dice.");
 	let d8Roll = rollDie(8);
@@ -81,6 +123,34 @@ function rollD8(initialRollToMatch, currentCounter) {
 	confirm("You have rolled " + d8Roll + "! Your score is now " + currentCounter + ". Proceed to roll the 10-sided dice.");
 	return currentCounter;
 }
+
+function rollD8PlayerTwo(initialRollToMatch, currentCounter, scorePlayerOne) {
+	confirm("Press OK to roll the 8-sided dice.");
+	let d8Roll = rollDie(8);
+	currentCounter++;
+	for (let i = 1; d8Roll !== initialRollToMatch; i++) {
+		confirm("You have rolled " + d8Roll + ". Your score is now " + currentCounter + ".");
+		d8Roll = rollDie(8);
+		currentCounter++;
+		if (currentCounter > scorePlayerOne) {
+			confirm("Your score of " + currentCounter + " has already exceeded Player 1\'s score of " + scorePlayerOne + ". Player 1 wins.\n To play again, reload the page.");
+			return currentCounter;
+		}
+		else {
+			confirm("Keep rolling the 8-sided dice until you roll a " + initialRollToMatch + ".");
+		}
+	}
+	confirm("You have rolled " + d8Roll + "! Your score is now " + currentCounter + ".");
+	if (currentCounter > scorePlayerOne) {
+		confirm("Your score of " + currentCounter + " has already exceeded Player 1\'s score of " + scorePlayerOne + ". Player 1 wins.\n To play again, reload the page.");
+		return currentCounter;
+	}
+	else {
+		confirm("Proceed to roll the 10-sided dice.");
+	}
+	return currentCounter;
+}
+
 
 function rollD10(initialRollToMatch, currentCounter) {
 	confirm("Press OK to roll the 10-sided dice.");
@@ -95,6 +165,34 @@ function rollD10(initialRollToMatch, currentCounter) {
 	return currentCounter;
 }
 
+function rollD10PlayerTwo(initialRollToMatch, currentCounter, scorePlayerOne) {
+	confirm("Press OK to roll the 10-sided dice.");
+	let d10Roll = rollDie(10);
+	currentCounter++;
+	for (let i = 1; d10Roll !== initialRollToMatch; i++) {
+		confirm("You have rolled " + d10Roll + ". Your score is now " + currentCounter + ".");
+		d10Roll = rollDie(10);
+		currentCounter++;
+		if (currentCounter > scorePlayerOne) {
+			confirm("Your score of " + currentCounter + " has already exceeded Player 1\'s score of " + scorePlayerOne + ". Player 1 wins.\n To play again, reload the page.");
+			return currentCounter;
+		}
+		else {
+			confirm("Keep rolling the 10-sided dice until you roll a " + initialRollToMatch + ".");
+		}
+	}
+	confirm("You have rolled " + d10Roll + "! Your score is now " + currentCounter + ".");
+	if (currentCounter > scorePlayerOne) {
+		confirm("Your score of " + currentCounter + " has already exceeded Player 1\'s score of " + scorePlayerOne + ". Player 1 wins.\n To play again, reload the page.");
+		return currentCounter;
+	}
+	else {
+		confirm("Proceed to roll the 12-sided dice.");
+	}
+	return currentCounter;
+}
+
+
 function rollD12(initialRollToMatch, currentCounter) {
 	confirm("Press OK to roll the 12-sided dice.");
 	let d12Roll = rollDie(12);
@@ -108,6 +206,34 @@ function rollD12(initialRollToMatch, currentCounter) {
 	return currentCounter;
 }
 
+function rollD12PlayerTwo(initialRollToMatch, currentCounter, scorePlayerOne) {
+	confirm("Press OK to roll the 12-sided dice.");
+	let d12Roll = rollDie(12);
+	currentCounter++;
+	for (let i = 1; d12Roll !== initialRollToMatch; i++) {
+		confirm("You have rolled " + d12Roll + ". Your score is now " + currentCounter + ".");
+		if (currentCounter > scorePlayerOne) {
+			confirm("Your score of " + currentCounter + " has already exceeded Player 1\'s score of " + scorePlayerOne + ". Player 1 wins.\n To play again, reload the page.");
+			return currentCounter;
+		}
+		else {
+			confirm("Keep rolling the 12-sided dice until you roll a " + initialRollToMatch + ".");
+		}
+		d12Roll = rollDie(12);
+		currentCounter++;
+	}
+	confirm("You have rolled " + d12Roll + "! Your score is now " + currentCounter + ".");
+		if (currentCounter > scorePlayerOne) {
+			confirm("Your score of " + currentCounter + " has already exceeded Player 1\'s score of " + scorePlayerOne + ". Player 1 wins.\n To play again, reload the page.");
+			return currentCounter;
+		}
+		else {
+			confirm("Proceed to roll the 20-sided dice.");
+		}
+	return currentCounter;
+}
+
+
 function rollD20(initialRollToMatch, currentCounter) {
 	confirm("Press OK to roll the 20-sided dice.");
 	let d20Roll = rollDie(20);
@@ -118,5 +244,29 @@ function rollD20(initialRollToMatch, currentCounter) {
 		currentCounter++;
 	}
 	confirm("You have rolled " + d20Roll + "! Your final score is " + currentCounter + ".");
+	return currentCounter;
+}
+
+function rollD20PlayerTwo(initialRollToMatch, currentCounter, scorePlayerOne) {
+	confirm("Press OK to roll the 20-sided dice.");
+	let d20Roll = rollDie(20);
+	currentCounter++;
+	for (let i = 1; d20Roll !== initialRollToMatch; i++) {
+		confirm("You have rolled " + d20Roll + ". Your score is now " + currentCounter + ".");
+		if (currentCounter > scorePlayerOne) {
+			confirm("Your score of " + currentCounter + " has already exceeded Player 1\'s score of " + scorePlayerOne + ". Player 1 wins.\n To play again, reload the page.");
+			return currentCounter;
+		}
+		else {
+			confirm("Keep rolling the 20-sided dice until you roll a " + initialRollToMatch + ".");
+		}
+		d20Roll = rollDie(20);
+		currentCounter++;
+	}
+	confirm("You have rolled " + d20Roll + "! Your final score is " + currentCounter + ".");
+	if (currentCounter > scorePlayerOne) {
+		confirm("Your score of " + currentCounter + " has already exceeded Player 1\'s score of " + scorePlayerOne + ". Player 1 wins.\n To play again, reload the page.");
+		return currentCounter;
+	}
 	return currentCounter;
 }
