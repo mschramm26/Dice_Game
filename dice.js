@@ -47,7 +47,7 @@ function convertUserInputToNumberOfPlayers(userInput) {
 }
 
 function startPlaying() {
-	let beginGame = confirm("Press OK to begin the game.");
+	confirm("Press OK to begin the game.");
 }
 
 function rollDie(numberOfSides) {
@@ -59,7 +59,7 @@ function rollD4() {
 	confirm("Press OK to roll the 4-sided dice.");
 	let initialRoll = rollDie(4);
 	counter++;
-	let message = confirm("You have rolled " + initialRoll + ". Roll each additional dice until it rolls a " + initialRoll + ". Your score is now " + counter + ". 1 point will be added to your score for each roll. The player who gets all the dice to match the first roll in the fewest turns will win.");
+	confirm("You have rolled " + initialRoll + ". Roll each additional dice until it rolls a " + initialRoll + ". Your score is now " + counter + ". 1 point will be added to your score for each roll. The player who gets all the dice to match the first roll in the fewest turns will win.");
 	return initialRoll;
 }
 
@@ -67,65 +67,61 @@ function rollD6(initialRollToMatch) {
 	confirm("Press OK to roll the 6-sided dice.");
 	let d6Roll = rollDie(6);
 	counter++;
-	let message;
 	for (let i = 1; d6Roll !== initialRollToMatch; i++) {
-		message = confirm("You have rolled " + d6Roll + ". Your score is now " + counter + ". Keep rolling until you roll a " + initialRollToMatch + ".");
+		confirm("You have rolled " + d6Roll + ". Your score is now " + counter + ". Keep rolling until you roll a " + initialRollToMatch + ".");
 		d6Roll = rollDie(6);
 		counter++;
 	}
-	message = confirm("You have rolled " + d6Roll + "! Your score is now " + counter + ". Proceed to roll the 8-sided dice.");
+	confirm("You have rolled " + d6Roll + "! Your score is now " + counter + ". Proceed to roll the 8-sided dice.");
+	return counter;
 }
 
 function rollD8(initialRollToMatch) {
 	confirm("Press OK to roll the 8-sided dice.");
 	let d8Roll = rollDie(8);
 	counter++;
-	let message;
 	for (let i = 1; d8Roll !== initialRollToMatch; i++) {
-		message = confirm("You have rolled " + d8Roll + ". Your score is now " + counter + ". Keep rolling until you roll a " + initialRollToMatch + ".");
+		confirm("You have rolled " + d8Roll + ". Your score is now " + counter + ". Keep rolling until you roll a " + initialRollToMatch + ".");
 		d8Roll = rollDie(8);
 		counter++;
 	}
-	message = confirm("You have rolled " + d8Roll + "! Your score is now " + counter + ". Proceed to roll the 10-sided dice.");
+	confirm("You have rolled " + d8Roll + "! Your score is now " + counter + ". Proceed to roll the 10-sided dice.");
 }
 
 function rollD10(initialRollToMatch) {
 	confirm("Press OK to roll the 10-sided dice.");
 	let d10Roll = rollDie(10);
 	counter++;
-	let message;
 	for (let i = 1; d10Roll !== initialRollToMatch; i++) {
-		message = confirm("You have rolled " + d10Roll + ". Your score is now " + counter + ". Keep rolling until you roll a " + initialRollToMatch + ".");
+		confirm("You have rolled " + d10Roll + ". Your score is now " + counter + ". Keep rolling until you roll a " + initialRollToMatch + ".");
 		d10Roll = rollDie(10);
 		counter++;
 	}
-	message = confirm("You have rolled " + d10Roll + "! Your score is now " + counter + ". Proceed to roll the 12-sided dice.");
+	confirm("You have rolled " + d10Roll + "! Your score is now " + counter + ". Proceed to roll the 12-sided dice.");
 }
 
 function rollD12(initialRollToMatch) {
 	confirm("Press OK to roll the 12-sided dice.");
 	let d12Roll = rollDie(12);
 	counter++;
-	let message;
 	for (let i = 1; d12Roll !== initialRollToMatch; i++) {
-		message = confirm("You have rolled " + d12Roll + ". Your score is now " + counter + ". Keep rolling until you roll a " + initialRollToMatch + ".");
+		confirm("You have rolled " + d12Roll + ". Your score is now " + counter + ". Keep rolling until you roll a " + initialRollToMatch + ".");
 		d12Roll = rollDie(12);
 		counter++;
 	}
-	message = confirm("You have rolled " + d12Roll + "! Your score is now " + counter + ". Proceed to roll the 20-sided dice.");
+	confirm("You have rolled " + d12Roll + "! Your score is now " + counter + ". Proceed to roll the 20-sided dice.");
 }
 
 function rollD20(initialRollToMatch) {
 	confirm("Press OK to roll the 20-sided dice.");
 	let d20Roll = rollDie(20);
 	counter++;
-	let message;
 	for (let i = 1; d20Roll !== initialRollToMatch; i++) {
-		message = confirm("You have rolled " + d20Roll + ". Your score is now " + counter + ". Keep rolling until you roll a " + initialRollToMatch + ".");
+		confirm("You have rolled " + d20Roll + ". Your score is now " + counter + ". Keep rolling until you roll a " + initialRollToMatch + ".");
 		d20Roll = rollDie(20);
 		counter++;
 	}
-	message = confirm("You have rolled " + d20Roll + "! Your final score is " + counter + ".");
+	confirm("You have rolled " + d20Roll + "! Your final score is " + counter + ".");
 	let scorePlayerOne = counter;
 	return scorePlayerOne;
 }
@@ -134,13 +130,12 @@ function rollD20PlayerTwo(initialRollToMatch) {
 	confirm("Press OK to roll the 20-sided dice.");
 	let d20Roll = rollDie(20);
 	counter++;
-	let message;
 	for (let i = 1; d20Roll !== initialRollToMatch; i++) {
-		message = confirm("You have rolled " + d20Roll + ". Your score is now " + counter + ". Keep rolling until you roll a " + initialRollToMatch + ".");
+		confirm("You have rolled " + d20Roll + ". Your score is now " + counter + ". Keep rolling until you roll a " + initialRollToMatch + ".");
 		d20Roll = rollDie(20);
 		counter++;
 	}
-	message = confirm("You have rolled " + d20Roll + "! Your final score is " + counter + ".");
+	confirm("You have rolled " + d20Roll + "! Your final score is " + counter + ".");
 	let scorePlayerTwo = counter;
 	return scorePlayerTwo;
 }
