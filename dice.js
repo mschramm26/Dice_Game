@@ -1,48 +1,59 @@
 "use strict";
 
+let counter = 0;
 
-function determineNumberOfPlayers() {
-	let userInput = prompt("Please enter 1 or 2 in the following field to indicate the number of players at this time.");
-	let numberOfPlayers = parseInt(userInput);
-
-	if ((numberOfPlayers !== 1) && (numberOfPlayers !== 2)) {
-		// alert("initial input does not equal 1 or 2");
-		location.reload();
-		return;
+function playGame() {
+	let userInput = promptUserForInput();
+	convertUserInputToNumberOfPlayers(userInput);
+	startPlaying();
+	let initialRollResults = rollD4();
+	rollD6(initialRollResults);
+	rollD8(initialRollResults);
+	rollD10(initialRollResults);
+	rollD12(initialRollResults);
+	let scorePlayerOne = rollD20(initialRollResults);
+	if (convertUserInputToNumberOfPlayers(userInput) === 2) {
+		counter = 0;
+		confirm("Now it\'s Player 2\'s turn.");
+		let initialRollResults = rollD4();
+		rollD6(initialRollResults);
+		rollD8(initialRollResults);
+		rollD10(initialRollResults);
+		rollD12(initialRollResults);
+		let scorePlayerTwo = rollD20PlayerTwo(initialRollResults);
+		if (scorePlayerOne < scorePlayerTwo) {
+			confirm("Player 1 scored " + scorePlayerOne + ". Player 2 scored " + scorePlayerTwo + ". Player 1 wins! The game is now over. To play again, reload the page.");
+		}
+		if (scorePlayerTwo < scorePlayerOne) {
+			confirm("Player 1 scored " + scorePlayerOne + ". Player 2 scored " + scorePlayerTwo + ". Player 2 wins! The game is now over. To play again, reload the page.");
+		}
+		if (scorePlayerOne === scorePlayerTwo) {
+			confirm("Player 1 scored " + scorePlayerOne + ". Player 2 scored " + scorePlayerTwo + ". You have tied! Refresh the page to play again to break the tie.");
+		}
 	}
-	else 
-		if ((numberOfPlayers === 1) || (numberOfPlayers === 2)) {
-		let numberOfPlayersConfirmation = prompt("You entered " + numberOfPlayers + " player(s). Type \"yes\" if this is correct. Type \"no\" if it is incorrect.");
-		if (numberOfPlayersConfirmation === "no") {
-			// alert("Confirmation is no");
-			location.reload();
-		}
-		else if ((numberOfPlayersConfirmation !== "yes") && (numberOfPlayersConfirmation !== "no")) {
-			// alert("Confirmation does not equal yes or no");
-			location.reload();
-			}
-		}
-	return numberOfPlayers;
 }
 
-determineNumberOfPlayers();
+playGame();
 
 
+function promptUserForInput() {
+	let userInput = prompt("Please enter 1 or 2 in the following field to indicate the number of players at this time.");
+	return userInput
+}
+
+function convertUserInputToNumberOfPlayers(userInput) {
+	let numberOfPlayers = parseInt(userInput);
+	return numberOfPlayers;
+}
 
 function startPlaying() {
 	let beginGame = confirm("Press OK to begin the game.");
 }
 
-startPlaying();
-
-
-
 function rollDie(numberOfSides) {
 	let roll = Math.floor(Math.random() * numberOfSides) + 1;
 	return roll;
 }
-
-let counter = 0;
 
 function rollD4() {
 	confirm("Press OK to roll the 4-sided dice.");
@@ -52,81 +63,65 @@ function rollD4() {
 	return initialRoll;
 }
 
-let initialRollResults = rollD4();
-
-
-
-function rollD6() {
+function rollD6(initialRollToMatch) {
 	confirm("Press OK to roll the 6-sided dice.");
 	let d6Roll = rollDie(6);
 	counter++;
 	let message;
-	for (let i = 1; d6Roll !== initialRollResults; i++) {
-		message = confirm("You have rolled " + d6Roll + ". Your score is now " + counter + ". Keep rolling until you roll a " + initialRollResults + ".");
+	for (let i = 1; d6Roll !== initialRollToMatch; i++) {
+		message = confirm("You have rolled " + d6Roll + ". Your score is now " + counter + ". Keep rolling until you roll a " + initialRollToMatch + ".");
 		d6Roll = rollDie(6);
 		counter++;
 	}
 	message = confirm("You have rolled " + d6Roll + "! Your score is now " + counter + ". Proceed to roll the 8-sided dice.");
 }
 
-rollD6();
-
-
-
-function rollD8() {
+function rollD8(initialRollToMatch) {
 	confirm("Press OK to roll the 8-sided dice.");
 	let d8Roll = rollDie(8);
 	counter++;
 	let message;
-	for (let i = 1; d8Roll !== initialRollResults; i++) {
-		message = confirm("You have rolled " + d8Roll + ". Your score is now " + counter + ". Keep rolling until you roll a " + initialRollResults + ".");
+	for (let i = 1; d8Roll !== initialRollToMatch; i++) {
+		message = confirm("You have rolled " + d8Roll + ". Your score is now " + counter + ". Keep rolling until you roll a " + initialRollToMatch + ".");
 		d8Roll = rollDie(8);
 		counter++;
 	}
 	message = confirm("You have rolled " + d8Roll + "! Your score is now " + counter + ". Proceed to roll the 10-sided dice.");
 }
 
-rollD8();
-
-function rollD10() {
+function rollD10(initialRollToMatch) {
 	confirm("Press OK to roll the 10-sided dice.");
 	let d10Roll = rollDie(10);
 	counter++;
 	let message;
-	for (let i = 1; d10Roll !== initialRollResults; i++) {
-		message = confirm("You have rolled " + d10Roll + ". Your score is now " + counter + ". Keep rolling until you roll a " + initialRollResults + ".");
+	for (let i = 1; d10Roll !== initialRollToMatch; i++) {
+		message = confirm("You have rolled " + d10Roll + ". Your score is now " + counter + ". Keep rolling until you roll a " + initialRollToMatch + ".");
 		d10Roll = rollDie(10);
 		counter++;
 	}
 	message = confirm("You have rolled " + d10Roll + "! Your score is now " + counter + ". Proceed to roll the 12-sided dice.");
 }
 
-rollD10();
-
-
-function rollD12() {
+function rollD12(initialRollToMatch) {
 	confirm("Press OK to roll the 12-sided dice.");
 	let d12Roll = rollDie(12);
 	counter++;
 	let message;
-	for (let i = 1; d12Roll !== initialRollResults; i++) {
-		message = confirm("You have rolled " + d12Roll + ". Your score is now " + counter + ". Keep rolling until you roll a " + initialRollResults + ".");
+	for (let i = 1; d12Roll !== initialRollToMatch; i++) {
+		message = confirm("You have rolled " + d12Roll + ". Your score is now " + counter + ". Keep rolling until you roll a " + initialRollToMatch + ".");
 		d12Roll = rollDie(12);
 		counter++;
 	}
 	message = confirm("You have rolled " + d12Roll + "! Your score is now " + counter + ". Proceed to roll the 20-sided dice.");
 }
 
-rollD12();
-
-
-function rollD20() {
-	confirm("Press OK to roll the 12-sided dice.");
+function rollD20(initialRollToMatch) {
+	confirm("Press OK to roll the 20-sided dice.");
 	let d20Roll = rollDie(20);
 	counter++;
 	let message;
-	for (let i = 1; d20Roll !== initialRollResults; i++) {
-		message = confirm("You have rolled " + d20Roll + ". Your score is now " + counter + ". Keep rolling until you roll a " + initialRollResults + ".");
+	for (let i = 1; d20Roll !== initialRollToMatch; i++) {
+		message = confirm("You have rolled " + d20Roll + ". Your score is now " + counter + ". Keep rolling until you roll a " + initialRollToMatch + ".");
 		d20Roll = rollDie(20);
 		counter++;
 	}
@@ -135,32 +130,17 @@ function rollD20() {
 	return scorePlayerOne;
 }
 
-rollD20();
-
-function nextPlayerTakesTurn(determineNumberOfPlayers) {
-	if (numberOfPlayers > 1) {
-		let initialRollResults = rollD4();
-		rollD6();
-		rollD8();
-		rollD10();
-		rollD12();
-		rollD20();
-		let scorePlayerTwo = score;
-		return scorePlayerTwo;
+function rollD20PlayerTwo(initialRollToMatch) {
+	confirm("Press OK to roll the 20-sided dice.");
+	let d20Roll = rollDie(20);
+	counter++;
+	let message;
+	for (let i = 1; d20Roll !== initialRollToMatch; i++) {
+		message = confirm("You have rolled " + d20Roll + ". Your score is now " + counter + ". Keep rolling until you roll a " + initialRollToMatch + ".");
+		d20Roll = rollDie(20);
+		counter++;
 	}
+	message = confirm("You have rolled " + d20Roll + "! Your final score is " + counter + ".");
+	let scorePlayerTwo = counter;
+	return scorePlayerTwo;
 }
-
-nextPlayerTakesTurn(determineNumberOfPlayers);
-
-
-function determineWinner(determineNumberOfPlayers) {
-	if ((numberOfPlayers = 2) && (scorePlayerOne < scorePlayerTwo)) {
-		message = confirm("Player 1 wins!");
-	}
-	if ((numberOfPlayers = 2) && (scorePlayerTwo < scorePlayerOne)) {
-		message = confirm("Player 2 wins!");
-	}
-}
-
-determineWinner(determineNumberOfPlayers);
-
